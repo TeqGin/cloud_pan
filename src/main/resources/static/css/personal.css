@@ -1,0 +1,105 @@
+html{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+body{
+    height: 100%;
+    width: 100%;
+}
+.left_top{
+    border-radius: 5px;
+    height: 170px;
+    line-height: 70px;
+    text-align: center;
+    background-color: #33aaff;
+}
+.frame{
+    height: 100%;
+}
+#main{
+    border-radius: 20px;
+    margin-top: -40px;
+    float: bottom;
+    width: 110px;
+}
+#user_name{
+    color: white;
+    font-size: large;
+}
+.left_frame{
+    height: 100%;
+}
+
+.right_frame{
+    border-radius: 10px;
+    background-color: #f2f4fa;
+    height: 100%;
+}
+.lab{
+    cursor:pointer;
+    color: #303030;
+    margin-left: 10px;
+    text-align: left;
+    font-size: medium;
+    font-family: PingFang SC,Helvetica,sans-seri;
+    height: 70px;
+    border-bottom: 2px solid #ededed;
+    line-height: 70px;
+}
+.lab:hover{
+    background-color: #f7f7f7
+}
+
+.hint{
+    color: #cbcbcb;
+    font-size: small;
+    float: right;
+}
+.white_bg{
+    margin-top: 50px;
+    margin-left: 50px;
+    border-radius: 5px;
+    background-color: white;
+    height: 100%;
+    width: 90%;
+    text-align: center;
+}
+
+#graph{
+    transform: translateX(50%) translateY(5%);
+}
+
+
+.white_bg{
+    text-align: left;
+}
+.cont{
+    margin-left: 50px;
+}
+#title_input{
+    margin-top: 50px;
+}
+#title_code{
+    margin-top: 5px;
+}
+#new_password {
+    height: 40px;
+    width: 250px;
+}
+#verify_code{
+    margin-top: 10px;
+    height: 40px;
+    width: 250px;
+}
+#submit {
+    margin-top: 20px;
+    background-color: #30a5ff;
+    color: white;
+}
+#send_code{
+    margin-top: 20px;
+    margin-left: -100px;
+    background-color: #30a5ff;
+    color: white;
+}

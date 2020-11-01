@@ -1,0 +1,37 @@
+spring:
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
+  mail:
+    default-encoding: UTF-8
+    username: xxxx
+    passwordxC: xxxx
+    host: xxxxx
+    port: 465
+    properties:
+      mail:
+        smtp:
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+            fallback: false
+          auth: true
+          starttls:
+            enable: true
+            required: true
+    protocol: smtps
+  thymeleaf:
+    prefix: classpath:/templates
+    cache: false
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:xxxx/cloud?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false
+    username: xxxx
+    password: xxxx
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+resources:
+  static-locations: classpath:/static,classpath:/templates

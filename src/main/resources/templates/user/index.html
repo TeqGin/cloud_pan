@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+    <!--    <link rel="stylesheet" href="/bootstrap-3.3.7-dist/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/index.css">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+    <title>个人网盘</title>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="height: 50px">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand">TeqGin</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/user/index" >Home</a></li>
+                <li><a href="/info/about" >About</a></li>
+                <li><a href="http://localhost:8000">My Blog</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <svg style="width: 45px; height: 45px;" t="1602168695485" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2518" width="200" height="200"><path d="M915.268098 425.487551c0-215.751322-174.908627-390.659949-390.659949-390.659949s-390.659949 174.908627-390.65995 390.659949c0 167.759015 105.756465 310.761962 254.217949 366.117943-45.263039 38.605765-74.043439 95.952505-74.04344 160.106361a37.460543 37.460543 0 1 0 74.921087 0c0-74.749838 60.814516-135.564354 135.564354-135.564354s135.564354 60.814516 135.564353 135.564354a37.460543 37.460543 0 1 0 74.921087 0c0-64.153856-28.7804-121.500596-74.04344-160.106361 148.461484-55.35598 254.217948-198.358927 254.217949-366.117943z m-390.659949 315.738864c-174.105901 0-315.738863-141.632962-315.738864-315.738864 0-174.095198 141.632962-315.738863 315.738864-315.738863s315.738863 141.643665 315.738863 315.738863c0 174.105901-141.632962 315.738863-315.738863 315.738864z" fill="#3E3A39" p-id="2519"></path><path d="M637.642662 508.104104c-15.198277 0-28.202437 9.086857-34.078392 22.069611 0.042812-0.139139 0.064218-0.310387 0.10703-0.438824-15.423041 27.485336-45.701863 47.499969-79.394945 47.499969a90.151473 90.151473 0 0 1-78.870498-46.633025c0.171248 0.406714 0.224763 0.866944 0.396012 1.273659a37.460543 37.460543 0 0 0-34.217531-22.326484 37.460543 37.460543 0 0 0-37.460543 37.460543c0 7.941635 2.504505 15.294605 6.732195 21.35251 28.341577 49.972364 81.856638 83.793883 143.420365 83.793883 62.24872 0 116.224011-34.613542 144.319418-85.527771a37.460543 37.460543 0 0 0-30.953111-58.524071z" fill="#3E3A39" p-id="2520"></path></svg>
+                </li>
+                <li><a href="/user/sign_out">sign out</a></li>
+                <li><a th:text="${user.name}" href="/user/personal"></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="row">
+    <div class="col-xs-2 frame-left">
+        <div class="left_background">
+            <div class="col-xs-12 labs pass_by" id="file_all">
+                <p class="lab" id="all">全部文件</p>
+            </div>
+            <div class="col-xs-12 labs pass_by">
+                <p class="lab" id="user_file" >我的文件</p>
+            </div>
+            <div th:each="type_name:${typeList}">
+                <div class="col-xs-12 labs pass_by">
+                    <p  class="lab" th:text="${type_name.typeName}"  th:onclick="select_type([[${type_name.typeName}]])"></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-xs-10 frame-right" >
+        <div class="col-xs-12 menu_bar">
+            <div class="search_and_upload">
+<!--                <button id="upload" class="btn btn-default">上传文件</button>-->
+                <form id="form_msg">
+                    <a href="javascript:;" class="a-upload btn btn-default">
+                        <input type="file" name="doc" id="doc" onchange="file_change(this)">上传文件
+                    </a>
+                </form>
+                <div class="search_container">
+                    <input type="text" id="search" placeholder="搜索你的文件">
+                    <svg t="1603463444401" class="icon pass_by" id="search_icon" viewBox="0 0 8192 8192" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3339" width="200" height="200"><path d="M976.738462 892.061538L712.861538 630.153846c53.169231-74.830769 80.738462-169.353846 66.953847-269.784615-23.630769-169.353846-161.476923-303.261538-332.8-319.015385C214.646154 17.723077 17.723077 214.646154 41.353846 448.984615c15.753846 169.353846 149.661538 309.169231 319.015385 332.8 100.430769 13.784615 194.953846-13.784615 269.784615-66.953846l261.907692 261.907693c11.815385 11.815385 29.538462 11.815385 41.353847 0l41.353846-41.353847c11.815385-11.815385 11.815385-31.507692 1.969231-43.323077zM157.538462 411.569231C157.538462 271.753846 271.753846 157.538462 411.569231 157.538462s254.030769 114.215385 254.030769 254.030769S551.384615 665.6 411.569231 665.6 157.538462 553.353846 157.538462 411.569231z" p-id="3340" fill="#8a8a8a"></path></svg>
+                </div>
+                <div class="describe">
+                    <p th:text="${type}"></p>
+                    <p th:text="${all_nums}" id="nums_describe"></p>
+                </div>
+            </div>
+            <div class="content">
+                <table class="table">
+                    <thead>
+                    <title>文件列表</title>
+                    <tr class="file_row">
+                        <td class="file_name file">文件名</td>
+                        <td class="file_size file">大小</td>
+                        <td class="file_type file">类型</td>
+                        <td class="file_date file">上传时间</td>
+                        <td class="file_op file">操作</td>
+                    </tr>
+                    </thead>
+                    <tbody th:if="${documentList.size() != 0}" id="file_data">
+                    <tr class="file_row" th:each="doc:${documentList}" id="doc_data">
+                        <td class="file_name file"><a  class="pass_by" th:text="${doc.fileName}" th:id="${doc.id}" th:dowmload="${doc.fileName}" th:onclick="downF([[${doc.id}]])"></a></td>
+                        <td class="file_size file" th:text="${doc.size}"></td>
+                        <td class="file_type file" th:text="${doc.typeName}"></td>
+                        <td class="file_date file" th:text="${doc.date}"></td>
+                        <td class="file_op file" th:if="${doc.uperId == user.account}"><a th:text="删除" class="btn btn-default pass_by" th:id="${doc.id}"  th:onclick="del([[${doc.id}]])"></a></td>
+                        <td class="file_op file" th:if="${doc.uperId != user.account}">无权限</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="split_page" th:if="${documentList.size() > 8}">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li>
+                            <a class="pass_by" id="previous_page"  aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li><a class="pass_by next_page" value="1" id="one" >1</a></li>
+                        <li><a class="pass_by next_page" value="2" id="two" >2</a></li>
+                        <li><a class="pass_by next_page" value="3" id="three"  th:if="${documentList.size() > 16}">3</a></li>
+                        <li><a class="pass_by next_page" value="4" id="four"  th:if="${documentList.size() > 24}">4</a></li>
+                        <li><a class="pass_by next_page" value="5" id="five"  th:if="${documentList.size() > 32}">5</a></li>
+                        <li>
+                            <a  class="pass_by" id="next_page" aria-label="Next" >
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="/js/index.js"></script>
+<script type="text/javascript" th:inline="javascript">
+
+    var documentList = [[${documentList}]]
+    var user = [[${user}]]
+    var count = 1
+    $("#file_data").empty()
+    for(var i= (count - 1) * 8; i < count * 8 ; i++){
+        console.log(documentList[i].id )
+        str = "<tr class=\"file_row\"  id=\"doc_data\">\n" +
+            "                        <td class=\"file_name file\"><a  class=\"pass_by\"  id=\'" +documentList[i].id+ "\' dowmload=" + documentList[i].fileName+ " onclick=downF(\'"+ documentList[i].id+ "\')>"+ documentList[i].fileName +"</a></td>\n" +
+            "                        <td class=\"file_size file\" >"+ documentList[i].size+"</td>\n" +
+            "                        <td class=\"file_type file\" >"+ documentList[i].typeName +"</td>\n" +
+            "                        <td class=\"file_date file\" >"+ documentList[i].date +"</td>\n"
+        if(documentList[i].uperId == user.account){
+            s = "                        <td class=\"file_op file\" ><a  class=\"btn btn-default pass_by\" id=\'" + documentList[i].id+  "\' onclick= del(\'"+documentList[i].id+"\')>删除</a></td>\n" +
+                "                    </tr>"
+        }else {
+            s = "                        <td class=\"file_op file\" >无权限</td>\n" +
+                "                    </tr>"
+        }
+        str = str +s
+        $("#file_data").append(str)
+    }
+    $(".next_page").click(function (e) {
+        var id = $(e.target).attr('id')
+        var value = document.getElementById(id).innerText
+        count = parseInt(value)
+        console.log('当前点击的页数:' + value)
+        $("#file_data").empty()
+        for(var i= (count - 1) * 8; i < count * 8 ; i++){
+            console.log(documentList[i].id )
+            str = "<tr class=\"file_row\"  id=\"doc_data\">\n" +
+                "                        <td class=\"file_name file\"><a  class=\"pass_by\"  id=\'" +documentList[i].id+ "\' dowmload=" + documentList[i].fileName+ " onclick=downF(\'"+ documentList[i].id+ "\')>"+ documentList[i].fileName +"</a></td>\n" +
+                "                        <td class=\"file_size file\" >"+ documentList[i].size+"</td>\n" +
+                "                        <td class=\"file_type file\" >"+ documentList[i].typeName +"</td>\n" +
+                "                        <td class=\"file_date file\" >"+ documentList[i].date +"</td>\n"
+            if(documentList[i].uperId == user.account){
+                s = "                        <td class=\"file_op file\" ><a  class=\"btn btn-default pass_by\" id=\'" + documentList[i].id+  "\' onclick= del(\'"+documentList[i].id+"\')>删除</a></td>\n" +
+                    "                    </tr>"
+            }else {
+                s = "                        <td class=\"file_op file\" >无权限</td>\n" +
+                    "                    </tr>"
+            }
+            str = str +s
+            $("#file_data").append(str)
+        }
+    })
+    $("#previous_page").click(function () {
+        var value = document.getElementById("one").innerText
+        var num = parseInt(value)
+        if (num != 1){
+            $("#one").innerText = '' + (parseInt(document.getElementById("one").innerText) - 1 )
+            $("#two").innerText = '' + (parseInt(document.getElementById("two").innerText) - 1 )
+            if ($("#three").length !=0 ) $("#three").innerText = '' + (parseInt(document.getElementById("three").innerText) - 1 )
+            if ($("#four").length !=0 ) $("#four").innerText = '' + (parseInt(document.getElementById("four").innerText) - 1 )
+            if ($("#five").length !=0 ) $("#five").innerText = '' + (parseInt(document.getElementById("five").innerText) - 1 )
+        }
+    })
+    $("#next_page").click(function () {
+
+        if ($("#five").length != 0 ){
+            var v = parseInt(document.getElementById("five").innerText)
+            if(documentList.length > v * 8){
+                $("#one").innerText = '' + (parseInt(document.getElementById("one").innerText) + 1 )
+                $("#two").innerText = '' + (parseInt(document.getElementById("two").innerText) + 1 )
+                $("#three").innerText = '' + (parseInt(document.getElementById("three").innerText) + 1 )
+                $("#four").innerText = '' + (parseInt(document.getElementById("four").innerText) + 1 )
+                $("#five").innerText = '' + (parseInt(document.getElementById("five").innerText) + 1 )
+            }
+        }
+    })
+</script>
+</html>

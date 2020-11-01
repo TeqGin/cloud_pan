@@ -1,0 +1,200 @@
+html{
+    height: 100%;
+}
+
+body{
+    padding-top: 50px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    height: 100%;
+}
+.row{
+    height: 100%;
+}
+.left_background{
+    height: 100%;
+    width: 100%;
+    background-color: #f7f7f7;
+}
+.frame-left{
+    overflow: hidden;
+    height: 600px;
+}
+.frame-right{
+    height: 100%;
+}
+.labs{
+    background-color: #f7f7f7;
+    border-bottom: 2px solid #f1f1f1;
+}
+.lab{
+    margin-top: 15px;
+    margin-left: 50px;
+    font-size: medium;
+}
+.menu_bar{
+    margin-left: -30px;
+    width: 103%;
+    height: 100%;
+}
+.labs:hover{
+    background-color: #eaeaea;
+}
+.search_container{
+    float: right;
+    width: 300px;
+    height: 30px;
+    margin-top: -30px;
+    margin-right: 0px;
+}
+.describe{
+    margin-top: 10px;
+}
+#upload{
+    margin-top: 10px;
+    color: white;
+    background-color: #30a5ff;
+}
+#search{
+    border-radius: 20px;
+    background-color: #eaeaea;
+    border:none;
+    width: 300px;
+    height: 30px;
+}
+
+#nums_describe{
+    margin-top: -30px;
+    float: right;
+}
+#modal_title{
+    margin-left: 25%;
+}
+#search_icon{
+    margin-left: 265px;
+    margin-top: -27px;
+}
+.pass_by{
+    cursor:pointer;
+}
+.content{
+    height: 70%;
+    margin-top: 15px;
+}
+.file{
+    height: 20px;
+}
+.file_row:hover{
+    background-color: #dffffd;
+}
+.file_name{
+    width: 600px;
+}
+.file_size{
+    width: 150px;
+}
+.file_type{
+    width: 150px;
+}
+.modal {
+    display: none; /* 默认隐藏 */
+    position: fixed; /* 根据浏览器定位 */
+    z-index: 1; /* 放在顶部 */
+    left: 0;
+    top: 0;
+    width: 100%; /* 全宽 */
+    height: 100%; /* 全高 */
+    overflow: hidden; /* 不允许滚动 */
+    background-color: rgba(0,0,0,0.4); /* 背景色 */
+}
+/*模态框内容*/
+.modal-content {
+    display: flex; /*采用flexbox布局*/
+    flex-direction: column; /*垂直排列*/
+    position: relative;
+    background-color: #fefefe;
+    margin: 10% auto; /*距顶部15% 水平居中*/
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    height: 500px;
+    animation: topDown 0.4s; /*自定义动画，从模态框内容上到下出现*/
+}
+@keyframes topDown {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+}
+/*模态框头部*/
+.modal-header {
+    display: flex; /*采用flexbox布局*/
+    flex-direction: row; /*水平布局*/
+    align-items: center; /*内容垂直居中*/
+    justify-content: space-between;
+}
+/*关闭X 样式*/
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.upload_form{
+    margin-left: 40%;
+    height: 300px;
+}
+
+
+/*a  upload */
+.a-upload {
+    font-size: medium;
+    margin-top: 10px;
+    color: white;
+    height: 35px;
+    background-color: #30a5ff;
+/*    padding: 4px 10px;*/
+    line-height: 20px;
+    position: relative;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1
+}
+
+.a-upload  input {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    cursor: pointer
+}
+
+.a-upload:hover {
+    color: #444;
+    background: #eee;
+    border-color: #ccc;
+    text-decoration: none
+}
+
+#form_msg{
+    margin-top: 10px;
+}
+
+#file_all{
+    background-color: #eaeaea;
+}
+
+#split_page{
+    text-align: center;
+    margin-top: 20px;
+    float: bottom;
+}
