@@ -23,6 +23,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+
+/**
+ * @author TeqGin
+ */
 @Controller
 @RequestMapping("/file")
 @EnableAutoConfiguration
@@ -47,8 +51,9 @@ public class FileController {
 
     /**
      *
+     * @author TeqGin
      * @param request
-     * @param doc
+     * @param doc 需要上传到服务器的文件
      * @return
      */
     @PostMapping(value = "/upload",consumes = "multipart/form-data")
@@ -155,6 +160,7 @@ public class FileController {
 
         }
     }
+    //删除文件
     @PostMapping("/del")
     @ResponseBody
     public void del(@RequestParam("id")String id, HttpServletRequest request){
@@ -168,6 +174,7 @@ public class FileController {
         }
         documentRepository.delete(doc);
     }
+
 
     @GetMapping("/user_file")
     public String userFile(HttpServletRequest request, Model model){
@@ -198,6 +205,11 @@ public class FileController {
         model.addAttribute("user", user);
         return "/user/index";
     }
+
+    /**
+     * @param typeName 根据类型查询
+     * @return
+     */
     @PostMapping("/select_file_type")
     public String selectFileType(@RequestParam("type_name")String typeName, Model model, HttpServletRequest request){
         User user = (User) request.getSession().getAttribute("user");

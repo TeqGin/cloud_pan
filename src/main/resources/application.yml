@@ -7,7 +7,7 @@ spring:
     default-encoding: UTF-8
     username: xxxx
     passwordxC: xxxx
-    host: xxxxx
+    host: xxxx
     port: 465
     properties:
       mail:

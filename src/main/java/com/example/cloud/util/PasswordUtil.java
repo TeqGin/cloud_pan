@@ -4,12 +4,22 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
 
+/**
+ * @author TeqGin
+ * 对密码进行加密处理
+ */
+
 public class PasswordUtil {
     public static String getVerifyCode(){
         String code = UUID.randomUUID().toString().replace("-","").substring(0,6);
         return code;
     }
 
+    /**
+     * md5加密
+     * @param password
+     * @return
+     */
     public static String encodePassword(String password) {
         try {
             // 密码加盐处理,确保密码更加安全

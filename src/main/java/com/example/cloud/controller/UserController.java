@@ -25,6 +25,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+/**
+ * @author TeqGin
+ */
 @Controller
 @RequestMapping("/user")
 @EnableAutoConfiguration
@@ -48,6 +52,7 @@ public class UserController {
         return "/user/login";
     }
 
+    //主页
     @GetMapping("/index")
     public String index(Model model, HttpServletRequest request){
         User user = (User) request.getSession().getAttribute("user");
@@ -71,18 +76,21 @@ public class UserController {
 
     @PostMapping("/verify")
     @ResponseBody
-    public User verify(@RequestParam("account")String account, @RequestParam("password")String password,
-                       HttpServletResponse response, HttpServletRequest request){
+    public User verify(@RequestParam("account")String account,
+                       @RequestParam("password")String password,
+                       HttpServletResponse response,
+                       HttpServletRequest request){
         if (userRepository.existsById(account)){
             //avoid id not found exception
             User user = userRepository.getOne(account);
             if (user.getAccount().equals(account)
                     && user.getPassword().equals(PasswordUtil.encodePassword(password))){
+                //cookie已暂停使用
                 Cookie cookie = new Cookie("account", account);
                 //set access permission:everywhere
                 cookie.setPath("/");
                 response.addCookie(cookie);
-
+                //使用session
                 request.getSession().setAttribute("user", user);
 
                 return user;
@@ -93,7 +101,8 @@ public class UserController {
 
     @PostMapping("/veri_sign_up")
     @ResponseBody
-    public User verifySignUp(@RequestParam("account")String account, @RequestParam("password")String password,
+    public User verifySignUp(@RequestParam("account")String account,
+                             @RequestParam("password")String password,
                              @RequestParam("name")String name){
         //confirm
         if(userRepository.existsById(account)){

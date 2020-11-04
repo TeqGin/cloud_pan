@@ -3,6 +3,11 @@ package com.example.cloud.util;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * @author TeqGin
+ * 这是用来判断文件类型的工具类
+ */
+
 public class FileTypeUtil {
     private static HashMap<String, ArrayList<String>> fileType = new HashMap<>();
     static {

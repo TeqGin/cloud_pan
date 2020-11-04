@@ -16,9 +16,11 @@ $("#change_account").click(function () {
 })
 
 
-
+//获取hidden的内容
 var graphx = document.getElementById('graphX').value
+//转成json格式
 var data_x = JSON.parse(graphx)
+//创建数组
 var data_formate = []
 for(var key in data_x){
     data_formate.push({"value":data_x[key], "name": key})

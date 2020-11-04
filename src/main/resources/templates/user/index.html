@@ -118,7 +118,12 @@
 </body>
 <script src="/js/index.js"></script>
 <script type="text/javascript" th:inline="javascript">
-
+    /**
+     * @author TeqGin
+     * 分页
+     * @type {*[][]}
+     */
+    //直接从thymeleaf中取得数据（数组）
     var documentList = [[${documentList}]]
     var user = [[${user}]]
     var count = 1
